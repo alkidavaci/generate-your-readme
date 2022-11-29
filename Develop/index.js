@@ -82,6 +82,11 @@ function writeToFile(fileName, data)  {
 
 // Function to initialize app
 function init() {
+    inquirer
+    .prompt(questions) //ask question in terminal
+    .then(answer => generateMarkdown(answer)) //generate markdown with input answers
+    .then(markdown => writeToFile('README.md', markdown)) //write the file
+    
 }
 
 // Function call to initialize app
