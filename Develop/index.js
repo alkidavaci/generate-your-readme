@@ -8,18 +8,25 @@ const generateMarkdown = require("./utils/generateMarkdown.js")
 //Array of questions for user input
 const questions = [{
     type: "input",
-    name: "projectTitle",
+    name: "title",
     message: "What is the project title?",
+    validate: function (answer) {
+        if (answer.length < 1) {
+            return console.log("Please enter the project title.");
+        }
+        return true;
+    }
 },
 {
     type: "input",
     name: "description",
-    message: "Describe your project: "
-},
-{
-    type: "input",
-    name: "tableOfContents",
-    message: "Add a table of contents: ",
+    message: "Describe your project: ",
+    validate: function (answer) {
+        if (answer.length < 1) {
+            return console.log("Please enter description of your project.");
+        }
+        return true;
+    }
 },
 {
     type: "input",
@@ -42,7 +49,13 @@ const questions = [{
         "MIT",
         "Mozilla",
         "Open"
-    ]
+    ],
+    validate: function (answer) {
+        if (answer.length < 1) {
+            return console.log("Please enter the license used.");
+        }
+        return true;
+    }
 },
 {
     type: "input",
@@ -62,12 +75,25 @@ const questions = [{
 {
     type: "input",
     name: "username",
-    message: "Please enter your GitHub username: "
+    message: "Please enter your GitHub username: ",
+    validate: function (answer) {
+        if (answer.length < 1) {
+            return console.log("Please enter your GitHub username.");
+        }
+        return true;
+    }
 },
 {
     type: "input",
     name: "email",
-    message: "Please enter your email: "
+    message: "Please enter your email: ",
+    validate: function (answer) {
+        const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+        if(!emailValid.test(answer)) {
+            return "You have to provide a valid email address!"
+        }
+        return true
+    }
 }
 ];
 
