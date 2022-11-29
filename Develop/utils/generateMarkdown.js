@@ -40,11 +40,18 @@ function generateMarkdown(data) {
   if (tests !== '') { tabOfCont += `
   - [Tests](#tests)` };
   
+  if (questions !== '') { tabOfCont += `
+  - [Questions](#Questions)
+  ` }else{
+    tabOfCont += `
+  - [Contact](#Contact)`};
+
   // Add on readme template only if is an input for installation, usage, contributions and test
     let installationAdd=''
     let usageAdd=''
     let contributingAdd=''
     let testAdd=''
+    let questionAdd=''
 
   if (installation !== '') { 
     installationAdd += `
@@ -70,6 +77,16 @@ function generateMarkdown(data) {
   ✏️ ${tests}
   ` };
 
+  if (questions !== '') { 
+    questionAdd += `
+  ## Questions
+  ✋ ${questions}<br>
+  `}
+  else {
+    questionAdd += `
+  ## Contact
+  `};
+
 // return readme template
   return `# ${title}
    
@@ -89,9 +106,7 @@ function generateMarkdown(data) {
   ${contributingAdd}
 
   ${testAdd}
-
-  ## Questions
-  ✋ ${questions}<br>
+  ${questionAdd}
   ✉️ Email me with any questions: [${email}](${email})<br>
   :octocat: Find me on GitHub: [${username}](https://github.com/${username})
   `;
